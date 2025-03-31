@@ -1,0 +1,193 @@
+[gd_scene load_steps=23 format=3 uid="uid://8ucw3mp04uyq"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/hippo.gd" id="1_lfs7d"]
+[ext_resource type="Texture2D" uid="uid://cmgkbtqxx8xuw" path="res://Assets/Sprites/hippo2.png" id="2_bteai"]
+[ext_resource type="PackedScene" uid="uid://c5xmd24jw04fl" path="res://Scenes/Entities/damage_box.tscn" id="3_gwdxw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke5dl"]
+atlas = ExtResource("2_bteai")
+region = Rect2(32, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmhxj"]
+atlas = ExtResource("2_bteai")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4j3m"]
+atlas = ExtResource("2_bteai")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31ir5"]
+atlas = ExtResource("2_bteai")
+region = Rect2(64, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc1sk"]
+atlas = ExtResource("2_bteai")
+region = Rect2(64, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6o4ao"]
+atlas = ExtResource("2_bteai")
+region = Rect2(64, 64, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehpwc"]
+atlas = ExtResource("2_bteai")
+region = Rect2(64, 80, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnb7e"]
+atlas = ExtResource("2_bteai")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pagmy"]
+atlas = ExtResource("2_bteai")
+region = Rect2(32, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrqvn"]
+atlas = ExtResource("2_bteai")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_387ya"]
+atlas = ExtResource("2_bteai")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2qai"]
+atlas = ExtResource("2_bteai")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7rj5"]
+atlas = ExtResource("2_bteai")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1glq"]
+atlas = ExtResource("2_bteai")
+region = Rect2(0, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khaho"]
+atlas = ExtResource("2_bteai")
+region = Rect2(0, 64, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opjgy"]
+atlas = ExtResource("2_bteai")
+region = Rect2(0, 80, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nnb7e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke5dl")
+}],
+"loop": true,
+"name": &"angry_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmhxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4j3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31ir5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc1sk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6o4ao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehpwc")
+}],
+"loop": true,
+"name": &"angry_walk",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnb7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pagmy")
+}],
+"loop": false,
+"name": &"damage",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrqvn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_387ya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2qai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7rj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1glq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khaho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opjgy")
+}],
+"loop": true,
+"name": &"passive_walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qt5s5"]
+size = Vector2(20, 13)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbdbx"]
+radius = 5.0
+
+[node name="Hippo" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_lfs7d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_nnb7e")
+animation = &"angry_idle"
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 1.5)
+shape = SubResource("RectangleShape2D_qt5s5")
+
+[node name="DamageBox" parent="." instance=ExtResource("3_gwdxw")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
+position = Vector2(12, 2)
+shape = SubResource("CircleShape2D_sbdbx")
+debug_color = Color(0.840987, 0.0915809, 0.108303, 0.42)
+
+[node name="AnimationTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="DEBUG_Hit" type="Button" parent="."]
+offset_left = -8.0
+offset_top = -23.0
+offset_right = 26.0
+offset_bottom = 8.0
+scale = Vector2(0.320449, 0.296213)
+text = "HIT"
+
+[node name="AggroLOS" type="RayCast2D" parent="."]
+editor_description = "Line of Sight for Aggro."
+position = Vector2(-1, -3)
+rotation = 0.0173089
+target_position = Vector2(59.1469, 7.97748)
+collision_mask = 2
+
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
+[connection signal="button_down" from="DEBUG_Hit" to="." method="_on_debug_hit_button_down"]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfvjglpfy4a6h"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/wrench.gd" id="1_fo1ba"]
+[ext_resource type="Texture2D" uid="uid://dacoa57k4w52o" path="res://Assets/Sprites/rachel-char.png" id="2_y47dw"]
+[ext_resource type="PackedScene" uid="uid://c5xmd24jw04fl" path="res://Scenes/Entities/damage_box.tscn" id="3_by05j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rhhm"]
+atlas = ExtResource("2_y47dw")
+region = Rect2(124, 155, 14, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pira0"]
+atlas = ExtResource("2_y47dw")
+region = Rect2(87, 154, 16, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w36sg"]
+atlas = ExtResource("2_y47dw")
+region = Rect2(85, 130, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fmkt"]
+atlas = ExtResource("2_y47dw")
+region = Rect2(138, 154, 16, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xvs7c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rhhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pira0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w36sg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fmkt")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmb4r"]
+radius = 8.0
+
+[node name="Wrench" type="Node2D"]
+z_index = 3
+script = ExtResource("1_fo1ba")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+rotation = 3.13584
+sprite_frames = SubResource("SpriteFrames_xvs7c")
+animation = &"spin"
+autoplay = "spin"
+frame = 1
+frame_progress = 0.450172
+
+[node name="DamageBox" parent="." instance=ExtResource("3_by05j")]
+rotation = 3.13584
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
+shape = SubResource("CircleShape2D_hmb4r")
+debug_color = Color(0.930679, 0.242233, 0.271237, 0.42)
+
+[node name="DespawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="DamageBox" to="." method="_on_damage_box_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

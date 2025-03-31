@@ -13,3 +13,6 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+#Specific file of unused assets
+tiles_laboratory_LandOfPixels.zip
